@@ -4,7 +4,7 @@ size = 4
 haar_file = 'haarcascade_frontalface_default.xml'
 datasets = 'datasets'
   
-# Part 1: Create fisherRecognizer 
+# Part 1: Create fisher Recognizer 
 print('Recognizing Face Please Be in sufficient Lights...') 
   
 # Create a list of images and a list of corresponding names 
@@ -31,7 +31,8 @@ model.train(images, lables)
 # Part 2: Use fisherRecognizer on camera stream 
 face_cascade = cv2.CascadeClassifier(haar_file) 
 webcam = cv2.VideoCapture(0) 
-while True: 
+userSatisfied = False
+while not userSatisfied: 
     (_, im) = webcam.read() 
     gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY) 
     faces = face_cascade.detectMultiScale(gray, 1.3, 5) 
@@ -42,18 +43,14 @@ while True:
         # Try to recognize the face 
         prediction = model.predict(face_resize) 
         cv2.rectangle(im, (x, y), (x + w, y + h), (0, 255, 0), 3) 
-  
         if prediction[1]<500: 
-  
            cv2.putText(im, '% s - %.0f' % 
 (names[prediction[0]], prediction[1]), (x-10, y-10),  
 cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0)) 
         else: 
           cv2.putText(im, 'not recognized',  
 (x-10, y-10), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0)) 
-  
     cv2.imshow('OpenCV', im) 
-      
     key = cv2.waitKey(10) 
     if key == 27: 
         break

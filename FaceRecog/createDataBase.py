@@ -7,12 +7,12 @@ haar_file = 'haarcascade_frontalface_default.xml'
 # All the faces data will be 
 #  present this folder
 datasets = os.getcwd() + '\\datasets'
-data_set_size = 1000  
+data_set_size = 300  
   
 # These are sub data sets of folder,  
 # for my faces I've used my name you can  
 # change the label here 
-sub_data = 'Ali'     
+sub_data = 'Ian'     
   
 path = os.path.join(datasets, sub_data) 
 if not os.path.isdir(path): 
